@@ -1,0 +1,1102 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Birthday Surprise 💗</title>
+
+<style>
+:root {
+  --pink: #ff4fa3;
+  --light-pink: #ffb8df;
+  --purple: #a855f7;
+  --night: #09051d;
+  --panel: #160b35;
+  --text: #fff0fb;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Trebuchet MS", Arial, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(ellipse at 15% 90%, #54206f, transparent 35%),
+    radial-gradient(ellipse at 90% 15%, #32105d, transparent 35%),
+    linear-gradient(145deg, #08051a, #16072e 55%, #09051d);
+  overflow-x: hidden;
+}
+
+button, input, textarea {
+  font: inherit;
+}
+
+button {
+  border: 0;
+  cursor: pointer;
+  padding: 13px 23px;
+  margin: 7px;
+  border-radius: 999px;
+  font-weight: bold;
+  transition: transform .2s, box-shadow .2s;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 18px #ff3ca777;
+}
+
+button:disabled {
+  opacity: .55;
+  cursor: not-allowed;
+}
+
+.page {
+  display: none;
+  min-height: 100vh;
+  padding: 28px 16px 42px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  isolation: isolate;
+}
+
+.page.active {
+  display: flex;
+}
+
+.card {
+  width: min(100%, 650px);
+  padding: clamp(22px, 5vw, 42px);
+  background: linear-gradient(145deg, #180b37f2, #0c0824f5);
+  border: 1px solid #ff76c866;
+  border-radius: 28px;
+  box-shadow: 0 0 25px #ff3ca733, 0 16px 50px #00000070;
+  position: relative;
+  z-index: 2;
+}
+
+h1 {
+  font-size: clamp(2rem, 7vw, 3.4rem);
+  line-height: 1.15;
+  color: #ff8bd2;
+  text-shadow: 0 0 12px #ff36b8a6;
+  margin: 10px 0 18px;
+}
+
+h2 {
+  color: #ff9cda;
+}
+
+p {
+  line-height: 1.7;
+}
+
+.eyebrow {
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #dca0f7;
+  font-size: .76rem;
+  font-weight: bold;
+}
+
+.primary {
+  color: white;
+  background: linear-gradient(120deg, #ff2d9a, #a855f7);
+  box-shadow: 0 0 18px #ff3ca777;
+}
+
+.secondary {
+  background: #2a1747;
+  color: #ffd4f1;
+  border: 1px solid #b66be8;
+}
+
+.heart-icon {
+  font-size: clamp(3rem, 12vw, 5.5rem);
+  filter: drop-shadow(0 0 15px #ff4fa3);
+  animation: heartbeat 1.3s infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  15% { transform: scale(1.12); }
+  30% { transform: scale(1); }
+  45% { transform: scale(1.08); }
+}
+
+input[type="text"], textarea {
+  width: 100%;
+  padding: 13px 15px;
+  margin: 8px 0;
+  border: 1px solid #a55eb9;
+  border-radius: 14px;
+  background: #100a28;
+  color: #fff0fb;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.decor {
+  position: fixed;
+  pointer-events: none;
+  opacity: .9;
+  z-index: 1;
+  filter: drop-shadow(0 0 9px #ff4fa3);
+  animation: drift 7s ease-in-out infinite;
+}
+
+@keyframes drift {
+  0%, 100% { transform: translateY(0) rotate(-8deg); }
+  50% { transform: translateY(-18px) rotate(8deg); }
+}
+
+.d1 { top: 9%; left: 5%; font-size: 24px; }
+.d2 { top: 22%; right: 7%; font-size: 30px; }
+.d3 { bottom: 13%; left: 8%; font-size: 28px; }
+.d4 { bottom: 9%; right: 8%; font-size: 23px; }
+
+/* COUNTDOWN */
+
+.countdown {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin: 25px 0;
+}
+
+.time-box {
+  background: linear-gradient(145deg, #241044, #351354);
+  border: 1px solid #ff70c477;
+  border-radius: 18px;
+  padding: 16px 5px;
+  box-shadow: 0 0 13px #ff44b51c;
+}
+
+.time-box strong {
+  display: block;
+  font-size: clamp(1.4rem, 6vw, 2.4rem);
+  color: #ff8bd2;
+  text-shadow: 0 0 10px #ff45b9a1;
+}
+
+.time-box span {
+  font-size: .8rem;
+}
+
+/* LETTER */
+
+.letter {
+  text-align: left;
+  padding: clamp(22px, 5vw, 38px);
+  border-radius: 8px 28px;
+  border: 1px solid #ff86ca;
+  background: linear-gradient(135deg, #ffd7ec, #f8bddd);
+  color: #5d234f;
+  box-shadow: 0 0 24px #ff49b544;
+  position: relative;
+}
+
+.letter-heading {
+  text-align: center;
+  font-family: Georgia, serif;
+  color: #a72f78;
+  font-size: 1.9rem;
+}
+
+.letter p {
+  color: #5d234f;
+  font-family: Georgia, serif;
+  font-size: 1.06rem;
+  line-height: 1.95;
+}
+
+.signature {
+  text-align: right;
+  color: #9b2c72;
+  font-style: italic;
+}
+
+/* BOW AND ARROW GAME */
+
+.game-area {
+  width: 100%;
+  overflow: hidden;
+  border: 2px solid #ff75c7;
+  border-radius: 18px;
+  background: #100725;
+  box-shadow: 0 0 18px #ff3ca733;
+}
+
+#gameCanvas {
+  width: 100%;
+  display: block;
+  touch-action: manipulation;
+}
+
+#gameMessage {
+  color: #ffb9e4;
+  min-height: 1.5em;
+  font-weight: bold;
+}
+
+/* THREE-VIDEO MEMORY GALLERY */
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 22px 0;
+}
+
+.photo-slot {
+  min-width: 0;
+  overflow: hidden;
+  border: 2px solid #ffd1ec;
+  border-radius: 4px;
+  background: #fff4fb;
+  padding: 7px 7px 18px;
+  box-shadow: 0 0 12px #ff52b333;
+  transform: rotate(-2deg);
+}
+
+.photo-slot:nth-child(2) {
+  transform: rotate(2deg);
+}
+
+.photo-slot:nth-child(3) {
+  transform: rotate(-1deg);
+}
+
+.photo-slot img,
+.photo-slot video {
+  display: block;
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 2px;
+  background: #160b2b;
+}
+
+.photo-slot span {
+  display: block;
+  padding: 9px 2px 5px;
+  font-size: .85rem;
+  color: #5a2b57;
+  font-weight: bold;
+}
+
+/* BIRTHDAY IDEA JAR */
+
+.jar {
+  font-size: 70px;
+  margin: 10px;
+  filter: drop-shadow(0 0 15px #ff4fa366);
+  animation: heartbeat 2s infinite;
+}
+
+.choice {
+  display: block;
+  text-align: left;
+  padding: 14px;
+  margin: 10px 0;
+  border: 1px solid #a75bbd;
+  border-radius: 16px;
+  background: #1b0d37;
+  color: #ffe7f8;
+}
+
+.choice input {
+  accent-color: #ff4fa3;
+  margin-right: 8px;
+}
+
+.thank-you {
+  color: #ff8bd2;
+  font-weight: bold;
+  margin-top: 15px;
+}
+
+/* CAKE */
+
+.cake-scene {
+  min-height: 255px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 25px 0 5px;
+  position: relative;
+}
+
+.cake {
+  position: relative;
+  width: min(240px, 70vw);
+  height: 125px;
+  margin-top: 40px;
+  border-radius: 12px 12px 22px 22px;
+  background: linear-gradient(90deg, #ff8fc8, #ffe1f1 50%, #ff8fc8);
+  box-shadow: inset 0 -15px #e85da8, 0 0 22px #ff3ca744;
+}
+
+.cake::before {
+  content: "";
+  position: absolute;
+  top: -13px;
+  left: -3px;
+  width: calc(100% + 6px);
+  height: 28px;
+  border-radius: 50%;
+  background: #ffe8f5;
+  border: 2px solid #ff86c9;
+}
+
+.cake::after {
+  content: "♡  ♡  ♡";
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  top: 48px;
+  left: 0;
+  font-size: 25px;
+  color: #b52f83;
+}
+
+.candle {
+  position: absolute;
+  bottom: 112px;
+  width: 10px;
+  height: 43px;
+  border-radius: 4px;
+  background: repeating-linear-gradient(
+    45deg, #fff 0 6px, #b8a0ff 6px 12px
+  );
+  z-index: 2;
+}
+
+.candle.c1 { left: 28%; }
+.candle.c2 { left: 48%; }
+.candle.c3 { left: 68%; }
+
+.flame {
+  position: absolute;
+  width: 13px;
+  height: 21px;
+  background: radial-gradient(
+    ellipse at 50% 65%, #fff5a4 0 20%, #ffb342 45%, #ff7e64 75%
+  );
+  border-radius: 70% 30% 60% 40%;
+  top: -25px;
+  left: -2px;
+  animation: flicker .5s infinite alternate;
+  filter: drop-shadow(0 0 7px #ffbe63);
+}
+
+@keyframes flicker {
+  from { transform: rotate(-8deg) scale(.92); }
+  to { transform: rotate(8deg) scale(1.08); }
+}
+
+.candle.blown .flame {
+  display: none;
+}
+
+/* HEART SHOWER */
+
+#heartShower {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  overflow: hidden;
+  pointer-events: none;
+  display: none;
+}
+
+.shower-heart {
+  position: absolute;
+  top: -50px;
+  animation: fall linear forwards;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(115vh) rotate(540deg);
+    opacity: .1;
+  }
+}
+
+@media (max-width: 480px) {
+  .countdown { gap: 5px; }
+  .time-box { padding: 12px 3px; }
+  .gallery { gap: 6px; }
+  .photo-slot { padding: 4px; }
+  .photo-slot img, .photo-slot video { height: 125px; }
+  .photo-slot span { font-size: .72rem; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="decor d1">💗</div>
+<div class="decor d2">✦</div>
+<div class="decor d3">♡</div>
+<div class="decor d4">✨</div>
+<div id="heartShower"></div>
+
+<!-- SCREEN 1: WELCOME -->
+<section class="page active" id="welcome">
+  <div class="card">
+    <div class="heart-icon">💗</div>
+    <p class="eyebrow">A tiny surprise for someone special</p>
+    <h1>A Little Birthday Magic</h1>
+    <p>Someone very special makes life more beautiful... this little surprise is just for you.</p>
+    <button class="primary" onclick="showPage('question')">Tap to begin 💗</button>
+  </div>
+</section>
+
+<!-- SCREEN 2: SURPRISE QUESTION -->
+<section class="page" id="question">
+  <div class="card">
+    <div class="heart-icon">🏹</div>
+    <h1>Are you ready?</h1>
+    <p>It's something special, just for you!</p>
+    <button class="primary" onclick="showPage('namePage')">Yes! 💕</button>
+    <button class="secondary" onclick="showPage('welcome')">Not yet...</button>
+  </div>
+</section>
+
+<!-- SCREEN 3: NAME -->
+<section class="page" id="namePage">
+  <div class="card">
+    <div class="heart-icon">🌸</div>
+    <h1>Who is this surprise for?</h1>
+    <p>Just tell me your name.</p>
+    <input id="recipientName" type="text" placeholder="Enter your name..." maxlength="45">
+    <br
+    <button class="primary" onclick="saveName()">Continue 💗</button>
+  </div>
+</section>
+
+<!-- SCREEN 4: COUNTDOWN -->
+<section class="page" id="countdownPage">
+  <div class="card">
+    <p class="eyebrow">The special day</p>
+    <h1 id="countdownTitle">Counting down to your special day</h1>
+    <p>Get ready for a day as amazing as you are!</p>
+    <div class="countdown">
+      <div class="time-box"><strong id="days">00</strong><span>Days</span></div>
+      <div class="time-box"><strong id="hours">00</strong><span>Hours</span></div>
+      <div class="time-box"><strong id="minutes">00</strong><span>Minutes</span></div>
+      <div class="time-box"><strong id="seconds">00</strong><span>Seconds</span></div>
+    </div>
+    <p id="countdownMessage">Every second brings us closer. 💕</p>
+    <button class="primary" onclick="showPage('letterPage')">Read your letter 💌</button>
+  </div>
+</section>
+
+<!-- SCREEN 5: LOVE LETTER -->
+<section class="page" id="letterPage">
+  <div class="card">
+    <p class="eyebrow">A letter from the heart</p>
+    <div class="letter">
+      <div class="letter-heading">For You, With Love ♡</div>
+      <p id="letterGreeting">Dear Someone Special,</p>
+
+      <!-- EDIT YOUR LETTER MESSAGE HERE -->
+      <p>
+        first i wise you a happy birthday to you i hope this will ,
+        surprise u edu nannu first time ethara wise maduthirodu ,
+        sorry nanu nannu ninnge yavagadru hurt or bejaru madudire.
+      </p>
+      <p>
+         i hope u will always Keep smiling, because you deserve all the happiness in the
+        world. May your birthday be filled with beautiful memories,
+        laughter, and wonderful surprises.
+      </p>
+      <p>
+        I hope this little surprise makes you smile today.
+        Here's to your dreams and all the lovely moments ahead. 💕
+      </p>
+      <p class="signature">once again wise you happy birthday to you </p>
+    </div>
+    <button class="primary" onclick="showPage('gamePage')">Play a little game 🏹</button>
+  </div>
+</section>
+
+<!-- SCREEN 6: BOW AND ARROW GAME -->
+<section class="page" id="gamePage">
+  <div class="card">
+    <p class="eyebrow">A little heart challenge</p>
+    <h1>Catch the Hearts! 🏹</h1>
+    <p>Click a glowing heart to shoot an arrow toward it. Collect 5 hearts to unlock your memories!</p>
+    <p>💗 Hearts: <strong id="score">0</strong> / 5
+       &nbsp; 🏹 Clicks: <strong id="shotCount">0</strong></p>
+    <div class="game-area">
+      <canvas id="gameCanvas" width="600" height="300" aria-label="Click a glowing heart to collect it" title="Click a glowing heart!"></canvas>
+    </div>
+    <p id="gameMessage">Click a glowing heart to begin! 💗</p>
+    <button class="secondary" onclick="resetGame()">Play Again ↻</button>
+    <br>
+    <button class="primary" id="gameNextButton" onclick="showPage('galleryPage')" disabled>Unlock Memories 🔒</button>
+    <p class="game-note">Tap or click one of the glowing hearts. Every heart counts!</p>
+  </div>
+</section>
+
+<!-- SCREEN 7: THREE LOCAL VIDEOS -->
+<section class="page" id="galleryPage">
+  <div class="card">
+    <p class="eyebrow">Little moments, big memories</p>
+    <h1>Our Birthday Memories 📸</h1>
+    <p>Some of my favourite moments with you.</p>
+    <div class="gallery">
+      <div class="photo-slot">
+        <video controls playsinline preload="metadata">
+          <source src="video1.mp4" type="video/mp4">
+          Your browser does not support video playback.
+        </video>
+        <span>Our little moments 💗</span>
+      </div>
+      <div class="photo-slot">
+        <video controls playsinline preload="metadata">
+          <source src="video2.mp4" type="video/mp4">
+          Your browser does not support video playback.
+        </video>
+        <span>Our adventures ✨</span>
+      </div>
+      <div class="photo-slot">
+        <video controls playsinline preload="metadata">
+          <source src="video3.mp4" type="video/mp4">
+          Your browser does not support video playback.
+        </video>
+        <span>Our favourite memories 🌸</span>
+      </div>
+    </div>
+    <p>Keep video1.mp4, video2.mp4 and video3.mp4 in the same folder as this HTML file.</p>
+    <button class="primary" onclick="showPage('ideaPage')">Open the Birthday Wish Jar 🎁</button>
+  </div>
+</section>
+
+<!-- SCREEN 8: BIRTHDAY IDEA JAR -->
+<section class="page" id="ideaPage">
+  <div class="card">
+    <p class="eyebrow">Make a happy memory</p>
+    <div class="jar">🎁</div>
+    <h1>Birthday Wish Jar</h1>
+    <p>Choose a little birthday plan you would enjoy.</p>
+
+    <form id="ideaForm">
+      <label class="choice">
+        <input type="radio" name="birthdayIdea" value="Visit a café" required>
+        ☕ Visit a café
+      </label>
+      <label class="choice">
+        <input type="radio" name="birthdayIdea" value="Watch a movie" required>
+        🎬 Watch a movie
+      </label>
+      <label class="choice">
+        <input type="radio" name="birthdayIdea" value="Go for dinner" required>
+        🍝 Go for dinner
+      </label>
+      <label class="choice">
+        <input type="radio" name="birthdayIdea" value="Go on a little adventure" required>
+        🌳 Go on a little adventure
+      </label>
+      <label class="choice">
+        <input type="radio" name="birthdayIdea" value="Play games together" required>
+        🎮 Play games together
+      </label>
+      <label class="choice">
+        <input type="radio" name="birthdayIdea" value="Have a cosy day at home" required>
+        🧸 Have a cosy day at home
+      </label>
+      <label class="choice">
+        <input type="radio" name="birthdayIdea" value="Have a birthday picnic" required>
+        🧺 Have a birthday picnic
+      </label>
+      <label class="choice">
+        <input type="radio" name="birthdayIdea" value="Surprise me!" required>
+        🎁 Surprise me!
+      </label>
+      <label class="choice">
+        <input type="radio" name="birthdayIdea" value="Something else" required>
+        ✨ Something else
+      </label>
+
+      <label for="extraIdea"><strong>Tell me more (optional)</strong></label>
+      <textarea id="extraIdea" name="extraIdea" rows="3"
+        maxlength="500" placeholder="Add details or write another idea here..."></textarea>
+
+      <button type="submit" class="primary" id="ideaSubmit">Send My Idea 💌</button>
+    </form>
+
+    <p id="ideaThanks" class="thank-you" hidden>
+      Thank you! 💗 Your birthday ideas have been received.
+    </p>
+    <p id="ideaError" hidden>
+      We couldn't send your idea right now. Please try again. 💕
+    </p>
+
+    <button class="secondary" onclick="showPage('cakePage')">Final surprise →</button>
+  </div>
+</section>
+
+<!-- SCREEN 9: FINAL CAKE -->
+<section class="page" id="cakePage">
+  <div class="card">
+    <p class="eyebrow">The final little surprise</p>
+    <h1 id="finalTitle">Happy Birthday! 💗</h1>
+    <p>Make a wish and tap the button to blow out your candles!</p>
+
+    <div class="cake-scene">
+      <div class="candle c1"><div class="flame"></div></div>
+      <div class="candle c2"><div class="flame"></div></div>
+      <div class="candle c3"><div class="flame"></div></div>
+      <div class="cake"></div>
+    </div>
+
+    <button class="primary" id="blowButton" onclick="blowCandles()">
+      Blow Out the Candles 🕯️
+    </button>
+    <p id="finalMessage">May your wishes find their way to you. ✨</p>
+    <button class="secondary" onclick="showPage('welcome')">Start Again ↻</button>
+  </div>
+</section>
+
+<script>
+/* =========================================
+   PERSONAL SETTINGS — EDIT HERE
+========================================= */
+
+// Change this to the recipient's birthday.
+// Format: "YEAR-MONTH-DAY HOUR:MINUTE:SECOND"
+const BIRTHDAY_DATE = "2026-12-25 00:00:00";
+
+// Your existing Formspree endpoint.
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/mvkgnllv";
+
+let savedName = "";
+let score = 0;
+let shots = 0;
+let shooting = false;
+let gameAnimation = null;
+let targetPhase = 0;
+let targetX = 470;
+let targetY = 105;
+let activeArrows = [];
+let showerInterval = null;
+let showerTimer = null;
+
+/* PAGE NAVIGATION */
+
+function showPage(id) {
+  document.querySelectorAll(".page").forEach(page => {
+    page.classList.remove("active");
+  });
+
+  document.getElementById(id).classList.add("active");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+
+  if (gameAnimation) {
+    cancelAnimationFrame(gameAnimation);
+    gameAnimation = null;
+  }
+
+  if (id === "gamePage") {
+    drawGame();
+  }
+
+  if (id === "countdownPage") {
+    updateCountdown();
+  }
+}
+
+function saveName() {
+  const input = document.getElementById("recipientName");
+  savedName = input.value.trim() || "Someone Special";
+
+  document.getElementById("countdownTitle").textContent =
+    "Counting down to " + savedName + "'s special day";
+
+  document.getElementById("letterGreeting").textContent =
+    "Dear " + savedName + ",";
+
+  document.getElementById("finalTitle").textContent =
+    "Happy Birthday, " + savedName + "! 💗";
+
+  showPage("countdownPage");
+}
+
+/* COUNTDOWN */
+
+function updateCountdown() {
+  const parts = BIRTHDAY_DATE.split(" ");
+  const datePart = parts[0].split("-").map(Number);
+  const timePart = (parts[1] || "00:00:00").split(":").map(Number);
+  let target = new Date(
+    datePart[0], datePart[1] - 1, datePart[2],
+    timePart[0] || 0, timePart[1] || 0, timePart[2] || 0
+  ).getTime();
+
+  // If this year's birthday has passed, count down to next year.
+  if (target <= Date.now()) {
+    const next = new Date(target);
+    next.setFullYear(next.getFullYear() + 1);
+    target = next.getTime();
+  }
+
+  const remaining = target - Date.now();
+  const days = Math.floor(remaining / 86400000);
+  const hours = Math.floor((remaining % 86400000) / 3600000);
+  const minutes = Math.floor((remaining % 3600000) / 60000);
+  const seconds = Math.floor((remaining % 60000) / 1000);
+
+  document.getElementById("days").textContent = String(days).padStart(2, "0");
+  document.getElementById("hours").textContent = String(hours).padStart(2, "0");
+  document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
+  document.getElementById("seconds").textContent = String(seconds).padStart(2, "0");
+}
+
+setInterval(updateCountdown, 1000);
+
+/* BOW AND ARROW GAME */
+
+const canvas = document.getElementById("gameCanvas");
+const ctx = canvas.getContext("2d");
+
+function drawHeart(x, y, size, color) {
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.scale(size / 30, size / 30);
+  ctx.beginPath();
+  ctx.moveTo(0, 10);
+  ctx.bezierCurveTo(-28, -8, -16, -25, 0, -12);
+  ctx.bezierCurveTo(16, -25, 28, -8, 0, 10);
+  ctx.closePath();
+  ctx.fillStyle = color;
+  ctx.shadowColor = color;
+  ctx.shadowBlur = 22;
+  ctx.fill();
+  ctx.restore();
+}
+
+function drawGame() {
+  if (!document.getElementById("gamePage").classList.contains("active")) {
+    return;
+  }
+
+  const w = canvas.width;
+  const h = canvas.height;
+  ctx.clearRect(0, 0, w, h);
+
+  const bg = ctx.createLinearGradient(0, 0, w, h);
+  bg.addColorStop(0, "#0b0620");
+  bg.addColorStop(.55, "#1b0a3b");
+  bg.addColorStop(1, "#321052");
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, w, h);
+
+  // Tiny stars.
+  for (let i = 0; i < 38; i++) {
+    ctx.fillStyle = i % 4 === 0 ? "#ff9cda" : "#fff4ff";
+    ctx.globalAlpha = .4 + (i % 3) * .2;
+    ctx.beginPath();
+    ctx.arc((i * 97 + 21) % w, (i * 53 + 17) % h, 1.5, 0, Math.PI * 2);
+    ctx.fill();
+  }
+  ctx.globalAlpha = 1;
+
+  // Floating hearts.
+  [[335,55,15],[390,205,13],[525,205,16],[275,150,10],[555,55,11]]
+    .forEach((p, i) => {
+      drawHeart(p[0], p[1] + Math.sin(targetPhase + i) * 7,
+        p[2], i % 2 ? "#ff4fa3" : "#ff85cc");
+    });
+
+  // Glowing pulsing target.
+  targetPhase += .055;
+  const pulse = 1 + Math.sin(targetPhase) * .12;
+  ctx.save();
+  ctx.beginPath();
+  ctx.arc(targetX, targetY, 43 * pulse, 0, Math.PI * 2);
+  ctx.fillStyle = "#ff4fa322";
+  ctx.shadowColor = "#ff39a8";
+  ctx.shadowBlur = 26;
+  ctx.fill();
+  ctx.restore();
+  drawHeart(targetX, targetY, 54 * pulse, "#ff4fa3");
+  drawHeart(targetX, targetY - 1, 27 * pulse, "#ffb8e2");
+
+  // Bow at the bottom-left.
+  ctx.save();
+  ctx.strokeStyle = "#ffb5df";
+  ctx.lineWidth = 7;
+  ctx.shadowColor = "#ff4fa3";
+  ctx.shadowBlur = 12;
+  ctx.beginPath();
+  ctx.moveTo(90, 205);
+  ctx.quadraticCurveTo(22, 250, 90, 278);
+  ctx.stroke();
+  ctx.strokeStyle = "#fff0fb";
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(90, 205);
+  ctx.lineTo(90, 278);
+  ctx.stroke();
+  ctx.restore();
+
+  // Animated arrows.
+  activeArrows.forEach(a => {
+    ctx.save();
+    ctx.translate(a.x, a.y);
+    ctx.rotate(a.angle);
+    ctx.strokeStyle = "#fff0fb";
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.moveTo(-20, 0);
+    ctx.lineTo(15, 0);
+    ctx.stroke();
+    ctx.fillStyle = "#ff7fc6";
+    ctx.beginPath();
+    ctx.moveTo(22, 0);
+    ctx.lineTo(11, -5);
+    ctx.lineTo(11, 5);
+    ctx.closePath();
+    ctx.fill();
+    ctx.restore();
+  });
+
+  // Ready arrow when no shot is in progress.
+  if (!shooting) {
+    ctx.strokeStyle = "#ffe6f6";
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.moveTo(90, 242);
+    ctx.lineTo(152, 242);
+    ctx.stroke();
+    ctx.fillStyle = "#ff8bd2";
+    ctx.beginPath();
+    ctx.moveTo(160, 242);
+    ctx.lineTo(148, 235);
+    ctx.lineTo(148, 249);
+    ctx.closePath();
+    ctx.fill();
+  }
+
+  gameAnimation = requestAnimationFrame(drawGame);
+}
+
+// Clicking directly on a visible heart starts the arrow animation.
+canvas.style.cursor = "pointer";
+canvas.addEventListener("click", function(event) {
+  if (shooting || score >= 5) return;
+
+  const rect = canvas.getBoundingClientRect();
+  const x = (event.clientX - rect.left) * (canvas.width / rect.width);
+  const y = (event.clientY - rect.top) * (canvas.height / rect.height);
+  const floatingHearts = [
+    [335, 55 + Math.sin(targetPhase) * 7, 22],
+    [390, 205 + Math.sin(targetPhase + 1) * 7, 20],
+    [525, 205 + Math.sin(targetPhase + 2) * 7, 23],
+    [275, 150 + Math.sin(targetPhase + 3) * 7, 18],
+    [555, 55 + Math.sin(targetPhase + 4) * 7, 19]
+  ];
+  const targetHit = Math.hypot(x - targetX, y - targetY) <= 58;
+  const floatingHit = floatingHearts.some(heart =>
+    Math.hypot(x - heart[0], y - heart[1]) <= heart[2]
+  );
+
+  if (targetHit || floatingHit) {
+    shootArrow(targetHit ? targetX : x, targetHit ? targetY : y);
+  } else {
+    document.getElementById("gameMessage").textContent =
+      "Try clicking right on a glowing heart! 💖";
+  }
+});
+
+function shootArrow(endX = 470, endY = 105) {
+  if (shooting || score >= 5) return;
+
+  shooting = true;
+  shots++;
+  document.getElementById("shotCount").textContent = shots;
+  document.getElementById("gameMessage").textContent =
+    "Your arrow is flying toward a glowing heart! 💘";
+
+  const startX = 112;
+  const startY = 242;
+  const duration = 450;
+  const startTime = performance.now();
+  const arrow = {
+    x: startX,
+    y: startY,
+    angle: Math.atan2(endY - startY, endX - startX)
+  };
+  activeArrows.push(arrow);
+
+  function fly(now) {
+    const t = Math.min(1, (now - startTime) / duration);
+    arrow.x = startX + (endX - startX) * t;
+    arrow.y = startY + (endY - startY) * t;
+
+    if (t < 1) {
+      requestAnimationFrame(fly);
+      return;
+    }
+
+    activeArrows = activeArrows.filter(a => a !== arrow);
+    shooting = false;
+    score++;
+
+    // Move the main heart after each successful hit, changing the next aim direction.
+    if (score < 5) {
+      let nextX, nextY;
+      do {
+        nextX = 220 + Math.random() * 330;
+        nextY = 45 + Math.random() * 190;
+      } while (Math.hypot(nextX - targetX, nextY - targetY) < 110);
+      targetX = nextX;
+      targetY = nextY;
+    }
+
+    document.getElementById("score").textContent = score;
+
+    const messages = [
+      "Bullseye! A heart full of love! 💗",
+      "You hit the heart! Cupid is proud! 🏹",
+      "A glowing heart is yours! ✨",
+      "Another heart won! You're magical! 💕",
+      "Perfect shot! Your memories are unlocked! 🎁"
+    ];
+
+    document.getElementById("gameMessage").textContent = messages[score - 1];
+
+    if (score >= 5) {
+      document.getElementById("gameNextButton").disabled = false;
+      document.getElementById("gameNextButton").textContent = "Unlock Memories 💖";
+    }
+  }
+
+  requestAnimationFrame(fly);
+}
+
+function resetGame() {
+  score = 0;
+  shots = 0;
+  shooting = false;
+  activeArrows = [];
+  targetX = 470;
+  targetY = 105;
+
+  document.getElementById("score").textContent = "0";
+  document.getElementById("shotCount").textContent = "0";
+  document.getElementById("gameMessage").textContent = "Click a glowing heart to begin! 💗";
+  document.getElementById("gameNextButton").disabled = true;
+  document.getElementById("gameNextButton").textContent = "Unlock Memories 🔒";
+}
+
+/* BIRTHDAY IDEA JAR / FORMSPREE */
+
+const ideaForm = document.getElementById("ideaForm");
+
+ideaForm.addEventListener("submit", async function(event) {
+  event.preventDefault();
+
+  const thanks = document.getElementById("ideaThanks");
+  const error = document.getElementById("ideaError");
+  const submitButton = document.getElementById("ideaSubmit");
+
+  thanks.hidden = true;
+  error.hidden = true;
+  submitButton.disabled = true;
+  submitButton.textContent = "Sending... 💌";
+
+  const formData = new FormData(ideaForm);
+  formData.append("recipient_name", savedName || "Someone Special");
+
+  try {
+    const response = await fetch(FORMSPREE_ENDPOINT, {
+      method: "POST",
+      body: formData,
+      headers: { "Accept": "application/json" }
+    });
+
+    if (!response.ok) throw new Error("Submission failed");
+
+    ideaForm.hidden = true;
+    thanks.hidden = false;
+  } catch (err) {
+    error.hidden = false;
+    error.textContent =
+      "We couldn't send your idea right now. Please check your connection and try again. 💕";
+  } finally {
+    submitButton.disabled = false;
+    submitButton.textContent = "Send My Idea 💌";
+  }
+});
+
+/* FINAL CAKE AND HEART SHOWER */
+
+function blowCandles() {
+  document.querySelectorAll(".candle").forEach(candle => {
+    candle.classList.add("blown");
+  });
+
+  const button = document.getElementById("blowButton");
+  button.disabled = true;
+  button.textContent = "Wish made! 💗";
+
+  document.getElementById("finalMessage").textContent =
+    "Happy Birthday! May your wish come true! 🎂✨";
+
+  startHeartShower();
+}
+
+function startHeartShower() {
+  const shower = document.getElementById("heartShower");
+
+  if (showerInterval) clearInterval(showerInterval);
+  if (showerTimer) clearTimeout(showerTimer);
+
+  shower.style.display = "block";
+  shower.innerHTML = "";
+
+  const symbols = ["💗", "💖", "💕", "💜", "💘", "❤️"];
+
+  showerInterval = setInterval(() => {
+    for (let i = 0; i < 5; i++) {
+      const heart = document.createElement("span");
+      heart.className = "shower-heart";
+      heart.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = (18 + Math.random() * 28) + "px";
+      heart.style.animationDuration = (3 + Math.random() * 4) + "s";
+      shower.appendChild(heart);
+      heart.addEventListener("animationend", () => heart.remove());
+    }
+  }, 120);
+
+  showerTimer = setTimeout(() => {
+    clearInterval(showerInterval);
+    showerInterval = null;
+
+    setTimeout(() => {
+      shower.style.display = "none";
+      shower.innerHTML = "";
+    }, 4500);
+
+    showerTimer = null;
+  }, 15000);
+}
+</script>
+
+</body>
+</html>
